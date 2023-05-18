@@ -1,46 +1,38 @@
 
 import './App.css';
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import { TodoList } from "./TodoList";
 import { TodoForm } from "./TodoForm";
 
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [quote,setQuote]= useState("test");
+  const [quotes,setQuotes]= useState("test");
 
+  useEffect(() => {
+    fetch("https://type.fit/api/quotes")
+      .then((res) => res.json())
+      .then((json) => {
+        setQuotes(json);
+        setQuote(json[0]);
+      });
+  }, []);
 
-  const onAdd = (input) =>{
-    setTodos(currentTodos =>{
-    return [...currentTodos, {id: crypto.randomUUID(), title: input, completed: false}]
-    })
-}
-
-  const deleteTodo=(id) =>{
-    setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
-    })
+  function fetchNewQuote(){
+    setQuote()
   }
-
-  function toggleTodo(id, completed) {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed }
-        }
-
-        return todo
-      })
-    })
-  }
-  
   return (
     <>
     <div className="App App-header ">
       <div className="p-4 container">
-        <h1 className="mt-4">Today's goals</h1>
-        <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
-        <TodoForm onAdd={onAdd}/>
-        
+        <h1 className="mt-4">Quotes generator</h1>
+        <button onClick={()=>fetchNewQuote()}>New quote</button>
+        <div>
+          <span>"</span>
+          {quote}
+          <span>"</span>
+          <span>{author}</span>
+        </div>
       </div>
     </div>
     
