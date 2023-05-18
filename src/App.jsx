@@ -26,7 +26,7 @@ function App() {
       <div className="p-4 container">
         {currentImage!=0 ?<button onClick={()=>previousImage()}>Previous</button>: ""}
         <img src={images[currentImage]}></img>
-        {currentImage!=images.length ?<button onClick={()=>nextImage()}>Next</button>: ""}
+        {currentImage!=images.length-1 ?<button onClick={()=>nextImage()}>Next</button>: ""}
       </div>
     </div>
     
