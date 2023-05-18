@@ -1,46 +1,32 @@
 
 import './App.css';
 import {useState} from "react"
-import { TodoList } from "./TodoList";
-import { TodoForm } from "./TodoForm";
+
+const images = [
+  "https://images.pexels.com/photos/3836292/pexels-photo-3836292.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+  "https://images.pexels.com/photos/2792157/pexels-photo-2792157.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+  "https://images.pexels.com/photos/1166209/pexels-photo-1166209.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+  "https://images.pexels.com/photos/1661179/pexels-photo-1661179.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+  "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+];
 
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [currentImage, setCurrentImage] = useState(0);
 
-
-  const onAdd = (input) =>{
-    setTodos(currentTodos =>{
-    return [...currentTodos, {id: crypto.randomUUID(), title: input, completed: false}]
-    })
-}
-
-  const deleteTodo=(id) =>{
-    setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
-    })
+  function previousImage(){
+    setCurrentImage(currentImage== 0 ? 0 : currentImage-1)
   }
-
-  function toggleTodo(id, completed) {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed }
-        }
-
-        return todo
-      })
-    })
+  function nextImage(){
+    setCurrentImage(currentImage== images.length ? images.length -1 : currentImage+1)
   }
-  
   return (
     <>
     <div className="App App-header ">
       <div className="p-4 container">
-        <h1 className="mt-4">Today's goals</h1>
-        <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
-        <TodoForm onAdd={onAdd}/>
-        
+        {currentImage!=0 ?<button onClick={()=>previousImage()}>Previous</button>: ""}
+        <img src={images[currentImage]}></img>
+        {currentImage==images.length ?<button onClick={()=>nextImage()}>Next</button>: ""}
       </div>
     </div>
     
