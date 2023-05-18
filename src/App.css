@@ -128,3 +128,15 @@ input[type="checkbox"]{
   height: 0;
   width: 0;
 }
+
+.button{
+  background-color: white;
+  border-radius: 40%;
+  margin: 20px;
+  border: none;
+  padding: 10px;
+}
+
+.button:hover{
+  background-color: rgb(118, 192, 221);
+}

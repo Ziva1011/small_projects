@@ -1,6 +1,8 @@
 
 import './App.css';
 import {useState} from "react"
+import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const images = [
   "https://images.pexels.com/photos/3836292/pexels-photo-3836292.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
@@ -23,10 +25,10 @@ function App() {
   return (
     <>
     <div className="App App-header ">
-      <div className="p-4 container">
-        {currentImage!=0 ?<button onClick={()=>previousImage()}>Previous</button>: ""}
-        <img src={images[currentImage]}></img>
-        {currentImage!=images.length-1 ?<button onClick={()=>nextImage()}>Next</button>: ""}
+      <div className="p-4 container mt-4">
+        {currentImage!=0 ?<button className="button" onClick={()=>previousImage()}> <FontAwesomeIcon icon={faArrowLeft} />  </button>: ""}
+        <img height="500" src={images[currentImage]}></img>
+        {currentImage!=images.length-1 ?<button className="button" onClick={()=>nextImage()}><FontAwesomeIcon icon={faArrowRight} /></button>: ""}
       </div>
     </div>
     
