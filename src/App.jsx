@@ -6,32 +6,33 @@ import { TodoForm } from "./TodoForm";
 
 
 function App() {
-  const [quote,setQuote]= useState("test");
-  const [quotes,setQuotes]= useState("test");
+  const [quote, setQuote]= useState("test");
+  const [quotes, setQuotes]= useState("test");
 
   useEffect(() => {
     fetch("https://type.fit/api/quotes")
-      .then((res) => res.json())
-      .then((json) => {
-        setQuotes(json);
-        setQuote(json[0]);
+      .then((response) => response.json())
+      .then((data) => {
+        setQuotes(data);
+        setQuote(data[3]);
       });
   }, []);
 
   function fetchNewQuote(){
-    setQuote()
+    setQuote(quotes[Math.floor(Math.random() *quotes.length)])
   }
   return (
     <>
     <div className="App App-header ">
       <div className="p-4 container">
         <h1 className="mt-4">Quotes generator</h1>
-        <button onClick={()=>fetchNewQuote()}>New quote</button>
-        <div>
+        <button className="generator-button mt-4" onClick={()=>fetchNewQuote()}>New quote</button>
+        <div className="quote mt-4">
           <span>"</span>
-          {quote}
+          <b>{quote.text}</b>
           <span>"</span>
-          <span>{author}</span>
+          
+          <p>{quote.author}</p>
         </div>
       </div>
     </div>
